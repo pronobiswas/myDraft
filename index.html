@@ -14,10 +14,11 @@
     }
     
   </style>
+  <link rel="stylesheet" href="./assets/style/style.css" />
 </head>
 <body>
   <div id="root"></div>
-  <div style="height:2000px;"></div>
+  <!-- <div style="height:2000px;"></div> -->
   <canvas id="canvas1"></canvas>
 
   
@@ -42,7 +43,7 @@
 
     
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x202020);
+    scene.background = new THREE.Color(0x000020);
 
     
     const camera = new THREE.PerspectiveCamera(
@@ -74,6 +75,7 @@
         const center = box.getCenter(new THREE.Vector3());
 
         planeModel.position.sub(center); 
+        planeModel.position.set(-200, -100, 0);
         planeModel.scale.setScalar(200 / size); 
 
         const distance = size / 2 / Math.tan((camera.fov * Math.PI) / 360);
@@ -85,17 +87,19 @@
           scrollTrigger: {
             trigger: root,
             start: "top top",
-            end: "+=1000",
+            end: "+=2000",
             pin:true,
             scrub: true
           }
         });
 
-        tl.to(planeModel.position, { x: 20, y: 3, duration: 2, ease: "power1.inOut" })
-          .to(planeModel.rotation, { y: 3, duration: 2, ease: "power1.inOut" })
-          .to(planeModel.rotation, { x: 5, duration: 2, ease: "power1.inOut" })
-          .to(planeModel.rotation, { x: Math.PI * 2, duration: 2, ease: "power1.inOut" })
-          .to(planeModel.position, { y: -2, duration: 2, ease: "power1.inOut" });
+        tl.to(planeModel.position, { x: -100, y: -100, duration: 2, ease: "power1.inOut" })
+          .to(planeModel.position, { x: 250, y: 0, duration: 2, ease: "power1.inOut" })
+          .to(planeModel.rotation, { x: Math.PI * 0.1, duration: 1, ease: "power1.inOut" },'<')
+          .to(planeModel.rotation, { y: Math.PI * 0.5, duration: 2, ease: "power1.inOut" },'<')
+          // .to(planeModel.rotation, { y: Math.PI * 0.5, duration: 2, ease: "power1.inOut" },'<')
+          .to(planeModel.position, { x:200, y: 20, duration: 2, ease: "power1.inOut" })
+          .to(planeModel.position, { x:20, y: 70, duration: 2, ease: "power1.inOut" });
       },
       (xhr) => console.log((xhr.loaded / xhr.total * 100) + "% loaded"),
       (error) => console.error("An error happened", error)
