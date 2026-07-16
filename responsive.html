@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --main-width: calc(100vw - 20px);
+            --main-height: calc(100vh - 80px);
+            --main-padding: clamp(20px, 80px, 5vw);
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #main{
+            width: 100%;
+            max-width:100vw;
+            height: 100vh;
+            margin: 0 auto;
+            padding: var(--main-padding);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #a72f2f;
+            overflow: hidden;
+        }
+        .wrapper{
+            width: var(--main-width);
+            height: var(--main-height);
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            background-color: #fff;
+            position: relative;
+        }
+        .text{
+            width: 34%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 9;
+        }
+        .text h1{
+            font-size: clamp(2rem, 12vw, 24rem);
+            text-transform: uppercase;
+            color: #a72f2f;
+            font-family: 'Arial', sans-serif;
+            line-height: 0.9em;
+            z-index: 9;
+        }
+        .image{
+            width: 66%;
+            height: 88%;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .image img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media screen and (max-width:560px) {
+          .image{
+            width: 100%;
+            height: 88%;
+          }
+          .image {
+            width: 100%;
+          }
+        }
+    </style>
+</head>
+<body>
+    <main id="main">
+        <div class="wrapper">
+            <div class="text">
+                <h1>iki</h1>
+                <h1>house</h1>
+            </div>
+            <div class="image">
+                <img src="https://th.bing.com/th/id/R.ba768c7dedfee4c89f77f5e5f1cfe8ed?rik=NXWmjBVJBRafqA&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f04%2fDownload-free-landscape-wallpaper-HD.jpg&ehk=g5DO1%2fwpplYKYeRKt7kK%2bRTK3CEjLxabCIS0BGGFML4%3d&risl=&pid=ImgRaw&r=0" alt="test">
+            </div>
+        </div>
+    </main>
+</body>
+</html>
