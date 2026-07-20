@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Filter Tabs</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+
+
+        .project-filter-section {
+            width: 100%;
+        }
+
+        .project-filter-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 65px;
+        }
+
+        .project-tabs {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+        }
+
+        button.project-tab {
+            background: transparent;
+            border: none;
+            font-size: 22px;
+            color: #8b8888;
+            cursor: pointer;
+            padding: 0;
+            transition: 0.3s ease;
+        }
+
+        .project-tab.active,
+        .project-tab:hover {
+            color: #111;
+        }
+
+        .project-view-switch {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+            font-size: 23px;
+            color: #8b8888;
+        }
+
+        .project-view-switch span {
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .project-view-switch span.active {
+            color: #111;
+        }
+
+        .project-filter-wrapper {
+            display: grid;
+            grid-template-columns: 52% 45%;
+            gap: 3%;
+            align-items: flex-start;
+        }
+
+        .project-list {
+            width: 100%;
+        }
+
+        .project-item {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            align-items: center;
+            min-height: 188px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+            cursor: pointer;
+            transition: 0.35s ease;
+        }
+
+        .project-item:first-child {
+            border-top: 1px solid rgba(0, 0, 0, 0.18);
+        }
+
+        .project-location {
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #c5c1c3;
+            line-height: 1.5;
+            transition: 0.35s ease;
+        }
+
+        .project-title {
+            font-size: clamp(36px, 4vw, 84px);
+            line-height: 1;
+            font-weight: 300;
+            color: #c9c7c8;
+            transition: 0.35s ease;
+        }
+
+        .project-item:hover .project-title,
+        .project-item.active .project-title {
+            color: #3c3939;
+        }
+
+        .project-item:hover .project-location,
+        .project-item.active .project-location {
+            color: #111827;
+        }
+
+        .project-image-box {
+            width: 100%;
+            height: 85vh;
+            overflow: hidden;
+            background: #eeeeee;
+            position: sticky;
+            top: 100px;
+        }
+
+        .project-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.25s ease, transform 0.45s ease;
+            display: block;
+        }
+
+        .project-image-box img.changing {
+            opacity: 0;
+            transform: scale(1.02);
+        }
+
+        /* Map view box */
+        .project-map-box {
+            width: 100%;
+            height: 85vh;
+            overflow: hidden;
+            background: #eeeeee;
+            position: sticky;
+            top: 100px;
+            display: none;
+            flex-direction: column;
+        }
+
+        .project-map-box.visible {
+            display: flex;
+        }
+
+        .project-map-frames {
+            position: relative;
+            width: 100%;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .project-map-frames iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .project-map-frames iframe.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .project-map-link {
+            display: inline-block;
+            padding: 14px 18px;
+            background: #111;
+            color: #fff;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            transition: 0.3s ease;
+        }
+
+        .project-map-link:hover {
+            background: #3c3939;
+        }
+
+        /* When map mode is active, hide image box and show map box */
+        .project-filter-wrapper.map-mode .project-image-box {
+            display: none;
+        }
+
+        .project-filter-wrapper.map-mode .project-map-box {
+            display: flex;
+        }
+
+        .project-item.hide {
+            display: none;
+        }
+
+        @media (max-width: 1200px) {
+            .project-filter-wrapper {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .project-image-box,
+            .project-map-box {
+                position: relative;
+                top: 0;
+                height: 520px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-filter-section {
+                padding: 25px 18px 35px;
+            }
+
+            .project-filter-top {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 25px;
+                margin-bottom: 35px;
+            }
+
+            .project-tabs {
+                gap: 22px;
+                flex-wrap: wrap;
+            }
+
+            button.project-tab {
+                font-size: 18px;
+                background-color: transparent;
+            }
+
+            .project-view-switch {
+                font-size: 18px;
+            }
+
+            .project-item {
+                grid-template-columns: 1fr;
+                gap: 14px;
+                min-height: auto;
+                padding: 35px 0;
+            }
+
+            .project-title {
+                font-size: 48px;
+            }
+
+            .project-image-box,
+            .project-map-box {
+                height: 360px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-title {
+                font-size: 38px;
+            }
+
+            .project-image-box,
+            .project-map-box {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="project-filter-section">
+
+        <div class="project-filter-top">
+            <div class="project-tabs">
+                <button class="project-tab active" data-filter="all">Our Selects</button>
+                <button class="project-tab" data-filter="coming-soon">Coming Up</button>
+                <button class="project-tab" data-filter="ongoing">Ongoing</button>
+                <button class="project-tab" data-filter="completed">Work Delivered</button>
+            </div>
+
+            <div class="project-view-switch">
+                <span class="view-toggle active" data-view="list">☷ List</span>
+                <span class="view-toggle" data-view="map">⌖ Map</span>
+            </div>
+        </div>
+
+        <div class="project-filter-wrapper">
+
+            <div class="project-list">
+                <!-- comming soon -->
+                <!-- Samruddhi -->
+                <div class="project-item active" data-category="coming-soon"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/07/Samruddhi.png"
+                    data-map-query="Samruddhi, Pune, Maharashtra, India"
+                    data-map-link="">
+                    <div class="project-location">
+                        Project: <br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title">Samruddhi</div>
+                </div>
+                <!-- ongoing -->
+                <!-- Vatika Greens -->
+                <div class="project-item" data-category="ongoing"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/07/Screenshot-2026-07-01-163628.png"
+                    data-map-query="Vatika Greens, Pune, Maharashtra, India"
+                    data-map-link="https://maps.app.goo.gl/1ZrTA2SahXce7uLA7">
+                    <div class="project-location">
+                        Project : <br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title">Vatika Greens</div>
+                </div>
+                <!-- Platinum Royale -->
+                <div class="project-item " data-category="ongoing"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/06/Platinum-Royale-1.png"
+                    data-map-query="Platinum Royale, Pune, Maharashtra, India"
+                    data-map-link="https://maps.app.goo.gl/oUbuVao6JHK4XRr3A">
+                    <div class="project-location">
+                        Project: <br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title">Platinum Royale</div>
+                </div>
+                <!-- completed -->
+                <!-- Platinum Towers -->
+                <div class="project-item active" data-category="completed"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/06/Platinum-Towers.png"
+                    data-map-query="Platinum Towers, Pune, Maharashtra, India"
+                    data-map-link="https://maps.app.goo.gl/oUbuVao6JHK4XRr3A">
+                    <div class="project-location">
+                        Project: <br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title">Platinum Towers</div>
+                </div>
+                <!-- Floriana -->
+                <div class="project-item active" data-category="completed"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/07/Floriana.png"
+                    data-map-query="Floriana, Pune, Maharashtra, India"
+                    data-map-link="https://maps.app.goo.gl/qd1krFBCaCpahMNV9">
+                    <div class="project-location">
+                        Project: <br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title">Floriana</div>
+                </div>
+                <!-- Oriana -->
+                <div class="project-item active" data-category="completed"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/07/Oriana.png"
+                    data-map-query="Oriana, Pune, Maharashtra, India"
+                    data-map-link="https://maps.app.goo.gl/z3W6aziHramTw9U6A">
+                    <div class="project-location">
+                        Project: <br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title">Oriana</div>
+                </div>
+                <!-- Bhagwati Royal -->
+                <div class="project-item" data-category="completed"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/06/Bhagwati-Royal.png"
+                    data-map-query="Bhagwati Royal, Pune, Maharashtra, India"
+                    data-map-link="https://maps.app.goo.gl/CpUe8WNUH4pquJCT6">
+                    <div class="project-location">
+                        Project :<br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title"> Bhagwati Royal</div>
+                </div>
+                <!--  Bhagwati Palms -->
+                <div class="project-item active" data-category="completed"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/06/Bhagwati-Palms.png"
+                    data-map-query="Bhagwati Palms, Pune, Maharashtra, India"
+                    data-map-link="https://maps.app.goo.gl/ijZrngVqedWEECAx7">
+                    <div class="project-location">
+                        Project: <br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title"> Bhagwati Palms</div>
+                </div>
+                <!-- Bhavani Ajala -->
+                <div class="project-item" data-category="completed"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/06/Bhavani-Ajala.png"
+                    data-map-query="Bhavani Ajala, Pune, Maharashtra, India"
+                    data-map-link="https://maps.app.goo.gl/8SUDzV6g4rqoVJWd8">
+                    <div class="project-location">
+                        Project :<br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title"> Bhavani Ajala</div>
+                </div>
+                <!-- Bhagwati Nagar -->
+                <div class="project-item" data-category="completed"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/06/Bhagwati-Nagar.png"
+                    data-map-query="Bhagwati Nagar, Pune, Maharashtra, India"
+                    data-map-link="https://maps.app.goo.gl/MotaR1aawwBPfR1S7">
+                    <div class="project-location">
+                        Project :<br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title"> Bhagwati Nagar</div>
+                </div>
+            </div>
+
+            <div class="project-image-box">
+                <img id="projectPreviewImage"
+                    src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80"
+                    alt="Project Preview">
+            </div>
+
+            <div class="project-map-box">
+                <div id="projectMapFrames" class="project-map-frames">
+                    <!-- One iframe per project is injected here on page load, then just shown/hidden on hover -->
+                </div>
+                <a id="projectMapLink" class="project-map-link" href="#" target="_blank" rel="noopener">
+                    View exact location on Google Maps
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const tabs = document.querySelectorAll(".project-tab");
+            const viewToggles = document.querySelectorAll(".view-toggle");
+            const projectItems = document.querySelectorAll(".project-item");
+            const previewImage = document.getElementById("projectPreviewImage");
+            const mapFramesContainer = document.getElementById("projectMapFrames");
+            const mapLink = document.getElementById("projectMapLink");
+            const filterWrapper = document.querySelector(".project-filter-wrapper");
+
+            let currentView = "list";
+
+            // ---- Build ALL map iframes ONCE on page load (fetched a single time) ----
+            projectItems.forEach(function (item, index) {
+                const mapQuery = item.getAttribute("data-map-query");
+                if (!mapQuery || !mapFramesContainer) return;
+
+                const iframe = document.createElement("iframe");
+                iframe.setAttribute("loading", "lazy");
+                iframe.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+                iframe.src = "https://www.google.com/maps?q=" + encodeURIComponent(mapQuery) + "&output=embed";
+
+                // Tag the iframe so we can find it later without re-fetching
+                iframe.dataset.mapIndex = index;
+
+                if (item.classList.contains("active")) {
+                    iframe.classList.add("active");
+                }
+
+                mapFramesContainer.appendChild(iframe);
+                item.dataset.mapFrameIndex = index;
+            });
+
+            function changeImage(imageUrl) {
+                if (!previewImage || !imageUrl) return;
+
+                previewImage.classList.add("changing");
+
+                setTimeout(function () {
+                    previewImage.removeAttribute("srcset");
+                    previewImage.removeAttribute("sizes");
+                    previewImage.src = imageUrl;
+                    previewImage.classList.remove("changing");
+                }, 180);
+            }
+
+            function changeMap(item) {
+                if (!mapFramesContainer) return;
+
+                const targetIndex = item.dataset.mapFrameIndex;
+
+                // Just toggle which pre-loaded iframe is visible — no re-fetching
+                mapFramesContainer.querySelectorAll("iframe").forEach(function (frame) {
+                    frame.classList.toggle("active", frame.dataset.mapIndex === targetIndex);
+                });
+
+                const mapLinkUrl = item.getAttribute("data-map-link");
+                if (mapLink) {
+                    if (mapLinkUrl) {
+                        mapLink.href = mapLinkUrl;
+                        mapLink.style.display = "block";
+                    } else {
+                        mapLink.href = "#";
+                        mapLink.style.display = "none";
+                    }
+                }
+            }
+
+            function setActiveItem(item) {
+                projectItems.forEach(function (project) {
+                    project.classList.remove("active");
+                });
+
+                item.classList.add("active");
+
+                if (currentView === "map") {
+                    changeMap(item);
+                } else {
+                    changeImage(item.getAttribute("data-image"));
+                }
+            }
+
+            projectItems.forEach(function (item) {
+                item.addEventListener("mouseenter", function () {
+                    setActiveItem(item);
+                });
+            });
+            tabs.forEach(function (tab) {
+                tab.addEventListener("click", function () {
+                    const filterValue = tab.getAttribute("data-filter");
+
+                    tabs.forEach(function (btn) {
+                        btn.classList.remove("active");
+                    });
+
+                    tab.classList.add("active");
+
+                    let firstVisibleItem = null;
+
+                    projectItems.forEach(function (item) {
+                        const itemCategory = item.getAttribute("data-category");
+
+                        if (filterValue === "all" || itemCategory === filterValue) {
+                            item.classList.remove("hide");
+
+                            if (!firstVisibleItem) {
+                                firstVisibleItem = item;
+                            }
+                        } else {
+                            item.classList.add("hide");
+                            item.classList.remove("active");
+                        }
+                    });
+
+                    if (firstVisibleItem) {
+                        setActiveItem(firstVisibleItem);
+                    }
+                });
+            });
+
+            viewToggles.forEach(function (toggle) {
+                toggle.addEventListener("click", function () {
+                    const view = toggle.getAttribute("data-view");
+                    if (view === currentView) return;
+
+                    currentView = view;
+
+                    viewToggles.forEach(function (t) {
+                        t.classList.remove("active");
+                    });
+                    toggle.classList.add("active");
+
+                    if (view === "map") {
+                        filterWrapper.classList.add("map-mode");
+                    } else {
+                        filterWrapper.classList.remove("map-mode");
+                    }
+
+                    const activeItem = document.querySelector(".project-item.active:not(.hide)")
+                        || document.querySelector(".project-item:not(.hide)");
+
+                    if (activeItem) {
+                        setActiveItem(activeItem);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

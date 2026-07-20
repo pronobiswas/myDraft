@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Filter Tabs</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+
+
+        .project-filter-section {
+            width: 100%;
+        }
+
+        .project-filter-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 65px;
+        }
+
+        .project-tabs {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+        }
+
+        button.project-tab {
+            background: transparent;
+            border: none;
+            font-size: 22px;
+            color: #8b8888;
+            cursor: pointer;
+            padding: 0;
+            transition: 0.3s ease;
+        }
+
+        .project-tab.active,
+        .project-tab:hover {
+            color: #111;
+        }
+
+        .project-view-switch {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+            font-size: 23px;
+            color: #8b8888;
+        }
+
+        .project-view-switch span.active {
+            color: #111;
+        }
+
+        .project-filter-wrapper {
+            display: grid;
+            grid-template-columns: 52% 45%;
+            gap: 3%;
+            align-items: flex-start;
+        }
+
+        .project-list {
+            width: 100%;
+        }
+
+        .project-item {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            align-items: center;
+            min-height: 188px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+            cursor: pointer;
+            transition: 0.35s ease;
+        }
+
+        .project-item:first-child {
+            border-top: 1px solid rgba(0, 0, 0, 0.18);
+        }
+
+        .project-location {
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #c5c1c3;
+            line-height: 1.5;
+            transition: 0.35s ease;
+        }
+
+        .project-title {
+            font-size: clamp(36px, 4vw, 84px);
+            line-height: 1;
+            font-weight: 300;
+            color: #c9c7c8;
+            transition: 0.35s ease;
+        }
+
+        .project-item:hover .project-title,
+        .project-item.active .project-title {
+            color: #3c3939;
+        }
+
+        .project-item:hover .project-location,
+        .project-item.active .project-location {
+            color: #111827;
+        }
+
+        .project-image-box {
+            width: 100%;
+            height: 85vh;
+            overflow: hidden;
+            background: #eeeeee;
+            position: sticky;
+            top: 100px;
+        }
+
+        .project-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.25s ease, transform 0.45s ease;
+            display: block;
+        }
+
+        .project-image-box img.changing {
+            opacity: 0;
+            transform: scale(1.02);
+        }
+
+        .project-item.hide {
+            display: none;
+        }
+
+        @media (max-width: 1200px) {
+            .project-filter-wrapper {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .project-image-box {
+                position: relative;
+                top: 0;
+                height: 520px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-filter-section {
+                padding: 25px 18px 35px;
+            }
+
+            .project-filter-top {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 25px;
+                margin-bottom: 35px;
+            }
+
+            .project-tabs {
+                gap: 22px;
+                flex-wrap: wrap;
+            }
+
+            button.project-tab {
+                font-size: 18px;
+                background-color: transparent;
+            }
+
+            .project-view-switch {
+                font-size: 18px;
+            }
+
+            .project-item {
+                grid-template-columns: 1fr;
+                gap: 14px;
+                min-height: auto;
+                padding: 35px 0;
+            }
+
+            .project-title {
+                font-size: 48px;
+            }
+
+            .project-image-box {
+                height: 360px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-title {
+                font-size: 38px;
+            }
+
+            .project-image-box {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="project-filter-section">
+
+        <div class="project-filter-top">
+            <div class="project-tabs">
+                <button class="project-tab active" data-filter="all">Our Selects</button>
+                <button class="project-tab" data-filter="coming-soon">Coming Up</button>
+                <button class="project-tab" data-filter="ongoing">Ongoing</button>
+                <button class="project-tab" data-filter="completed">Work Delivered</button>
+            </div>
+
+            <div class="project-view-switch">
+                <span class="active">☷ List</span>
+                <span>⌖ Map</span>
+            </div>
+        </div>
+
+        <div class="project-filter-wrapper">
+
+            <div class="project-list">
+                <!-- comming soon -->
+                <!-- Samruddhi -->
+                <div class="project-item active" data-category="coming-soon"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/07/Samruddhi.png">
+                    <div class="project-location">
+                        Project: <br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title">Samruddhi</div>
+                </div>
+                <!-- ongoing -->
+                <!-- Vatika Greens -->
+                <div class="project-item" data-category="ongoing"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/07/Screenshot-2026-07-01-163628.png">
+                    <div class="project-location">
+                        Project : <br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title">Vatika Greens</div>
+                </div>
+                <!-- Platinum Royale -->
+                <div class="project-item " data-category="ongoing"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/06/Platinum-Royale-1.png">
+                    <div class="project-location">
+                        Project: <br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title">Platinum Royale</div>
+                </div>
+                <!-- completed -->
+                <!-- Platinum Towers -->
+                <div class="project-item active" data-category="completed"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/06/Platinum-Towers.png">
+                    <div class="project-location">
+                        Project: <br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title">Platinum Towers</div>
+                </div>
+                <!-- Floriana -->
+                <div class="project-item active" data-category="completed"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/07/Floriana.png">
+                    <div class="project-location">
+                        Project: <br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title">Floriana</div>
+                </div>
+                <!-- Oriana -->
+                <div class="project-item active" data-category="completed"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/07/Oriana.png">
+                    <div class="project-location">
+                        Project: <br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title">Oriana</div>
+                </div>
+                <!-- Bhagwati Royal -->
+                <div class="project-item" data-category="completed"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/06/Bhagwati-Royal.png">
+                    <div class="project-location">
+                        Project :<br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title"> Bhagwati Royal</div>
+                </div>
+                <!--  Bhagwati Palms -->
+                <div class="project-item active" data-category="completed"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/06/Bhagwati-Palms.png">
+                    <div class="project-location">
+                        Project: <br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title"> Bhagwati Palms</div>
+                </div>
+                <!-- Bhavani Ajala -->
+                <div class="project-item" data-category="completed"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/06/Bhavani-Ajala.png">
+                    <div class="project-location">
+                        Project :<br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title"> Bhavani Ajala</div>
+                </div>
+                <!-- Bhagwati Nagar -->
+                <div class="project-item" data-category="completed"
+                    data-image="https://akn18.mypreviewsite.online/wp-content/uploads/2026/06/Bhagwati-Nagar.png">
+                    <div class="project-location">
+                        Project :<br>
+                        Pune , Maharashtra , India
+                    </div>
+                    <div class="project-title"> Bhagwati Nagar</div>
+                </div>
+            </div>
+
+            <div class="project-image-box">
+                <img id="projectPreviewImage"
+                    src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80"
+                    alt="Project Preview">
+            </div>
+
+        </div>
+
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const tabs = document.querySelectorAll(".project-tab");
+            const projectItems = document.querySelectorAll(".project-item");
+            const previewImage = document.getElementById("projectPreviewImage");
+
+            function changeImage(imageUrl) {
+                if (!previewImage || !imageUrl) return;
+
+                previewImage.classList.add("changing");
+
+                setTimeout(function () {
+                    previewImage.removeAttribute("srcset");
+                    previewImage.removeAttribute("sizes");
+                    previewImage.src = imageUrl;
+                    previewImage.classList.remove("changing");
+                }, 180);
+            }
+
+            function setActiveItem(item) {
+                projectItems.forEach(function (project) {
+                    project.classList.remove("active");
+                });
+
+                item.classList.add("active");
+                changeImage(item.getAttribute("data-image"));
+            }
+
+            projectItems.forEach(function (item) {
+                item.addEventListener("mouseenter", function () {
+                    setActiveItem(item);
+                });
+            });
+
+            tabs.forEach(function (tab) {
+                tab.addEventListener("click", function () {
+                    const filterValue = tab.getAttribute("data-filter");
+
+                    tabs.forEach(function (btn) {
+                        btn.classList.remove("active");
+                    });
+
+                    tab.classList.add("active");
+
+                    let firstVisibleItem = null;
+
+                    projectItems.forEach(function (item) {
+                        const itemCategory = item.getAttribute("data-category");
+
+                        if (filterValue === "all" || itemCategory === filterValue) {
+                            item.classList.remove("hide");
+
+                            if (!firstVisibleItem) {
+                                firstVisibleItem = item;
+                            }
+                        } else {
+                            item.classList.add("hide");
+                            item.classList.remove("active");
+                        }
+                    });
+
+                    if (firstVisibleItem) {
+                        setActiveItem(firstVisibleItem);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
