@@ -7,101 +7,160 @@
     <title>Document</title>
 </head>
 <style>
-    .container {
+    #process_step {
         width: 100%;
         height: 100%;
-        background-color: black;
+        display: flex;
+        justify-content: space-between;
     }
 
-    svg {
+    #process_step .process_aside {
+        width: 50%;
+    }
+
+    img {
         width: 100%;
         height: 100%;
+        object-fit: cover;
+    }
+
+    #process_step .process_aside svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    #process_step .process_aside svg #ball1 {
+        fill: #730f0a59;
+    }
+
+    .process_aside_image {
+        position: relative;
+    }
+
+    @media (max-width: 768px) {
+        #process_step {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        #process_step .process_aside {
+            width: 100%;
+        }
+
+        #process_step .process_aside svg {
+            width: 100%;
+            height: auto;
+        }
+
+        #process_step .process_aside img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .process_aside_image .handsPic {
+        width: 37%;
+        height: auto;
+        position: absolute;
+        top: 53%;
+        right: 47%;
+        transform: translate(50%, -50%);
+        clip-path: inset(0 100% 0 0);
+        /* animation: reveal 3s ease forwards; */
+    }
+
+    @keyframes reveal {
+        from {
+            clip-path: inset(0 100% 0 0);
+        }
+
+        to {
+            clip-path: inset(0 0 0 0);
+        }
     }
 </style>
 
 <body>
     <div class="container">
 
-        <svg id="processStep" viewBox="0 0 1921 972" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="0" width="1920" height="967" fill="none" fill-opacity="0.84" />
-            <rect x="0" y="0" width="936" height="966" fill="none" stroke="black" />
-            <path
-                d="M788 4H51C23.3858 4 1 26.3858 1 54V61.4444C1 89.0587 23.3857 111.444 50.9999 111.444H773.478C801.092 111.444 823.478 133.83 823.478 161.444V169.393C823.478 197.02 801.072 219.411 773.445 219.393L151.098 218.987C68.217 218.933 1 286.106 1 368.987V391.222C1 474.065 68.1573 541.222 151 541.222H781C808.614 541.222 831 563.608 831 591.222V598.667C831 626.281 808.614 648.667 781 648.667H151C68.1573 648.667 1 715.824 1 798.667V821C1 903.843 68.1573 971 151 971H888C915.614 971 938 948.614 938 921V914.06C938 886.459 915.634 864.078 888.033 864.06L166.917 863.588C139.21 863.57 116.801 841.025 116.951 813.318L116.989 806.345C117.137 778.85 139.459 756.634 166.955 756.616L788.098 756.209C870.903 756.155 938 689.014 938 606.209V584.072C938 501.115 870.663 433.91 787.706 434.073L166.777 435.291C139.125 435.345 116.679 412.944 116.679 385.291V376.333C116.679 348.719 139.065 326.333 166.679 326.333H788C870.843 326.333 938 259.176 938 176.333V154C938 71.1573 870.843 4 788 4Z"
-                fill="url(#paint0_linear_370_18)" stroke="transparent" stroke-width="2" />
-            <!-- step 01 -->
-            <g>
-                <circle id="ball1" cx="55" cy="58" r="50" fill="#FE0707" />
-                <text x="55" y="60" text-anchor="middle" dominant-baseline="middle" font-size="34" fill="white"
-                    font-family="Arial">
-                    01
-                </text>
-                <text x="230" y="58" text-anchor="middle" dominant-baseline="middle" font-size="30" fill="black"
-                    font-family="Arial">
-                    Initial discussion
-                </text>
-            </g>
-            <!-- step 02 -->
-            <g>
-                <circle cx="778" cy="273" r="50" fill="#FE0707" />
-                <text x="780" y="275" text-anchor="middle" dominant-baseline="middle" font-size="34" fill="white"
-                    font-family="Arial">
-                    02
-                </text>
-                <text x="540" y="275" text-anchor="middle" dominant-baseline="middle" font-size="30" fill="black"
-                    font-family="Arial">
-                    Site and document review
-                </text>
-            </g>
-            <!-- step 03 -->
-            <g>
-                <circle cx="135" cy="485" r="50" fill="#FE0707" />
-                <text x="135" y="485" text-anchor="middle" dominant-baseline="middle" font-size="34" fill="white"
-                    font-family="Arial">
-                    03
-                </text>
-                <text x="465" y="485" text-anchor="middle" dominant-baseline="middle" font-size="30" fill="black"
-                    font-family="Arial">
-                    Feasibility and development assessment
-                </text>
-            </g>
-            <!-- step 04 -->
-            <g>
-                <circle cx="780" cy="703" r="50" fill="#FE0707" />
-                <text x="780" y="705" text-anchor="middle" dominant-baseline="middle" font-size="34" fill="blue"
-                    font-family="Arial">
-                    04
-                </text>
-                <text x="480" y="705" text-anchor="middle" dominant-baseline="middle" font-size="30" fill="black"
-                    font-family="Arial">
-                    Proposal and structured planning
-                </text>
-            </g>
-            <!-- step 05 -->
-            <g>
-                <circle cx="130" cy="910" r="50" fill="#FE0707" />
-                <text x="125" y="915" text-anchor="middle" dominant-baseline="middle" font-size="34" fill="blue"
-                    font-family="Arial">
-                    05
-                </text>
-                <text x="435" y="915" text-anchor="middle" dominant-baseline="middle" font-size="30" fill="black"
-                    font-family="Arial">
-                    Partnership and execution roadmap
-                </text>
-            </g>
-            <path id="ballPath"
-                d="M49 52H785.418C840.118 52 884.667 95.9501 885.408 150.645L885.637 167.543C886.389 222.993 841.875 268.465 786.422 268.895L148.224 273.845C93.3002 274.271 49 318.916 49 373.842V382.524C49 437.146 92.8286 481.662 147.444 482.512L785.629 492.446C840.244 493.296 884.072 537.813 884.072 592.434V610.093C884.072 665.322 839.3 710.093 784.072 710.093H149C93.7715 710.093 49 754.865 49 810.093V817C49 872.228 93.7715 917 149 917H854.206"
-                stroke="blue" stroke-width="3" />
-            <rect x="997" width="924" height="967" fill="black" />
-            <!-- <image href="https://akn18.mypreviewsite.online/wp-content/uploads/2026/07/pexels-wei86-travel-31932701-32002621.jpg" x="50%" y="0" width="50%" height="100%"  /> -->
-            <defs>
-                <linearGradient id="paint0_linear_370_18" x1="2.15683" y1="36.7705" x2="937.999" y2="38.639"
-                    gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#E8F9FA" />
-                    <stop offset="0.418269" stop-color="#FFF0C8" />
-                    <stop offset="1" stop-color="#E7FBEE" />
-                </linearGradient>
-            </defs>
-        </svg>
+        <div id="process_step" class="">
+            <aside class="process_aside">
+                <svg id="processStep" width="1024" height="995" viewBox="0 0 1024 995" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0" y="0" width="1022" height="993" fill="white" opacity:0.5 />
+                    <path
+                        d="M808.68 16H70.1067C42.4336 16 20 38.3858 20 66V73.4444C20 101.059 42.4335 123.444 70.1066 123.444H794.127C821.8 123.444 844.234 145.83 844.234 173.444V181.393C844.234 209.02 821.78 231.411 794.094 231.393L170.418 230.987C87.3605 230.933 20 298.106 20 380.987V403.222C20 486.065 87.3006 553.222 170.32 553.222H801.665C829.338 553.222 851.772 575.608 851.772 603.222V610.667C851.772 638.281 829.338 660.667 801.665 660.667H170.32C87.3006 660.667 20 727.824 20 810.667V833C20 915.843 87.3006 983 170.32 983H908.893C936.566 983 959 960.614 959 933V926.06C959 898.459 936.586 876.078 908.926 876.06L186.271 875.588C158.505 875.57 136.048 853.025 136.198 825.318L136.237 818.345C136.385 790.85 158.755 768.634 186.309 768.616L808.778 768.209C891.76 768.155 959 701.014 959 618.209V596.072C959 513.115 891.519 445.91 808.385 446.073L186.131 447.291C158.42 447.345 135.926 424.944 135.926 397.291V388.333C135.926 360.719 158.36 338.333 186.033 338.333H808.68C891.7 338.333 959 271.176 959 188.333V166C959 83.1573 891.7 16 808.68 16Z"
+                        fill="url(#paint0_linear_381_2)" />
+                    <g transform="translate(80,70) scale(1.01)">
+                        <path id="ballPath2"
+                            d="M0.5 0.5H724.858C783.99 0.5 831.926 48.4359 831.926 107.568C831.926 166.7 783.99 214.636 724.858 214.636H102.189C46.0279 214.636 0.5 260.164 0.5 316.325C0.5 371.821 44.9942 417.069 100.482 418L723.36 428.458C783.612 429.47 831.926 478.602 831.926 538.862C831.926 599.845 782.489 649.281 721.507 649.281H103.75C46.7266 649.281 0.5 695.508 0.5 752.531C0.5 809.555 46.7266 855.781 103.75 855.781H818.426"
+                            stroke="transparent" />
+                    </g>
+                    <text x="215" y="80" font-size="34" font-family="Arial, sans-serif" fill="#333" text-anchor="start">
+                        Initial Discussion
+                    </text>
+                    <text x="215" y="300" font-size="34" font-family="Arial, sans-serif" fill="#333"
+                        text-anchor="start">
+                        Site And Document Review
+                    </text>
+                    <text x="215" y="510" font-size="34" font-family="Arial, sans-serif" fill="#333"
+                        text-anchor="start">
+                        Fesaibility And Development Assessment
+                    </text>
+                    <text x="215" y="730" font-size="34" font-family="Arial, sans-serif" fill="#333"
+                        text-anchor="start">
+                        Proposal And Structured Planing
+                    </text>
+                    <text x="215" y="940" font-size="34" font-family="Arial, sans-serif" fill="#333"
+                        text-anchor="start">
+                        Partnership Abd Execution Roadmap
+                    </text>
+                    <path
+                        d="M70.1064 23H808.68C887.848 23 952 87.0374 952 166V188.333C952 267.296 887.848 331.333 808.68 331.333H186.032C154.508 331.333 128.926 356.839 128.926 388.333V397.291C128.926 428.83 154.576 454.353 186.145 454.291L808.398 453.073C887.675 452.918 952 517.001 952 596.072V618.209C952 697.136 887.905 761.157 808.773 761.209L186.305 761.616C154.915 761.637 129.406 786.948 129.236 818.307L129.198 825.279V825.28C129.028 856.633 154.237 882.166 185.526 882.583L186.267 882.588L908.922 883.06C932.731 883.075 952 902.337 952 926.06V933C952 956.734 932.714 976 908.894 976H170.32C91.1527 976 27 911.963 27 833V810.667C27 731.704 91.1527 667.667 170.32 667.667H801.665C833.19 667.667 858.771 642.161 858.771 610.667V603.222C858.771 571.728 833.19 546.222 801.665 546.222H170.32C91.1527 546.222 27 482.185 27 403.222V380.987L27.0117 379.139C28.0039 300.991 91.8285 237.936 170.414 237.987L794.089 238.393C825.628 238.413 851.233 212.902 851.233 181.393V173.444C851.233 141.95 825.652 116.444 794.127 116.444H70.1064C46.2852 116.444 27 97.1785 27 73.4443V66C27 42.2659 46.2853 23.0002 70.1064 23Z"
+                        stroke="black" stroke-opacity="0.02" stroke-width="14" />
+                    <circle id="ball2" cx="75" cy="69" r="40" fill="#73100A" />
+                    <circle cx="155" cy="289" r="38.5" fill="#C9A67A" fill-opacity="0.36" stroke="#C9A67A"
+                        stroke-width="3" />
+                    <circle cx="155" cy="69" r="38.5" fill="#C9A67A" fill-opacity="0.3" stroke="#C9A67A"
+                        stroke-width="3" />
+                    <path d="M154.58 82V61.732L150.116 62.884V59.536L156.308 56.8H159.008V82H154.58Z" fill="black" />
+                    <path
+                        d="M146.944 302V298.868C148.552 297.596 150.088 296.324 151.552 295.052C153.016 293.78 154.336 292.52 155.512 291.272C156.688 290.024 157.612 288.8 158.284 287.6C158.956 286.4 159.292 285.248 159.292 284.144C159.292 283.424 159.16 282.752 158.896 282.128C158.632 281.504 158.212 281 157.636 280.616C157.084 280.232 156.34 280.04 155.404 280.04C154.492 280.04 153.712 280.244 153.064 280.652C152.44 281.06 151.972 281.612 151.66 282.308C151.348 282.98 151.192 283.748 151.192 284.612H147.016C147.064 282.788 147.46 281.264 148.204 280.04C148.948 278.816 149.956 277.904 151.228 277.304C152.5 276.68 153.928 276.368 155.512 276.368C157.216 276.368 158.668 276.68 159.868 277.304C161.068 277.928 161.992 278.804 162.64 279.932C163.288 281.06 163.612 282.392 163.612 283.928C163.612 285.056 163.396 286.172 162.964 287.276C162.556 288.356 161.98 289.412 161.236 290.444C160.492 291.452 159.652 292.436 158.716 293.396C157.804 294.332 156.856 295.232 155.872 296.096C154.888 296.936 153.94 297.716 153.028 298.436H164.296V302H146.944Z"
+                        fill="black" />
+                    <circle cx="155" cy="497" r="38.5" fill="#C9A67A" fill-opacity="0.44" stroke="#C9A67A"
+                        stroke-width="3" />
+                    <path
+                        d="M154.728 510.432C153.096 510.432 151.608 510.144 150.264 509.568C148.92 508.968 147.84 508.068 147.024 506.868C146.232 505.644 145.812 504.108 145.764 502.26H150.012C150.036 503.1 150.228 503.868 150.588 504.564C150.972 505.236 151.512 505.776 152.208 506.184C152.904 506.568 153.744 506.76 154.728 506.76C155.664 506.76 156.456 506.58 157.104 506.22C157.776 505.86 158.28 505.368 158.616 504.744C158.952 504.12 159.12 503.424 159.12 502.656C159.12 501.72 158.892 500.952 158.436 500.352C157.98 499.728 157.356 499.26 156.564 498.948C155.772 498.636 154.872 498.48 153.864 498.48H151.992V494.916H153.864C155.184 494.916 156.264 494.616 157.104 494.016C157.944 493.392 158.364 492.492 158.364 491.316C158.364 490.332 158.04 489.54 157.392 488.94C156.768 488.34 155.868 488.04 154.692 488.04C153.468 488.04 152.496 488.4 151.776 489.12C151.08 489.84 150.696 490.728 150.624 491.784H146.376C146.448 490.272 146.832 488.964 147.528 487.86C148.248 486.732 149.22 485.868 150.444 485.268C151.668 484.668 153.096 484.368 154.728 484.368C156.432 484.368 157.872 484.668 159.048 485.268C160.224 485.868 161.112 486.672 161.712 487.68C162.336 488.688 162.648 489.792 162.648 490.992C162.648 491.928 162.468 492.78 162.108 493.548C161.748 494.316 161.256 494.964 160.632 495.492C160.032 495.996 159.324 496.368 158.508 496.608C159.444 496.8 160.272 497.172 160.992 497.724C161.736 498.276 162.312 498.984 162.72 499.848C163.152 500.688 163.368 501.672 163.368 502.8C163.368 504.168 163.032 505.44 162.36 506.616C161.712 507.768 160.74 508.692 159.444 509.388C158.172 510.084 156.6 510.432 154.728 510.432Z"
+                        fill="black" />
+                    <circle cx="155" cy="721" r="38.5" fill="#C9A67A" fill-opacity="0.42" stroke="#C9A67A"
+                        stroke-width="3" />
+                    <path
+                        d="M157.04 734V729.212H144.548V725.756L156.428 708.8H161.324V725.432H164.744V729.212H161.324V734H157.04ZM149.192 725.432H157.292V713.552L149.192 725.432Z"
+                        fill="black" />
+                    <circle cx="155" cy="929" r="38.5" fill="#C9A67A" fill-opacity="0.37" stroke="#C9A67A"
+                        stroke-width="3" />
+                    <path
+                        d="M155.412 942.432C153.612 942.432 152.052 942.12 150.732 941.496C149.436 940.848 148.416 939.972 147.672 938.868C146.928 937.74 146.484 936.468 146.34 935.052H150.552C150.768 936.108 151.308 936.996 152.172 937.716C153.036 938.412 154.116 938.76 155.412 938.76C156.396 938.76 157.236 938.532 157.932 938.076C158.628 937.596 159.168 936.96 159.552 936.168C159.96 935.352 160.164 934.44 160.164 933.432C160.164 932.4 159.96 931.5 159.552 930.732C159.168 929.964 158.628 929.376 157.932 928.968C157.236 928.536 156.432 928.32 155.52 928.32C154.392 928.32 153.42 928.584 152.604 929.112C151.812 929.616 151.236 930.252 150.876 931.02H146.7L148.788 916.8H162.684V920.58H152.028L150.876 926.808C151.428 926.208 152.16 925.728 153.072 925.368C153.984 924.984 155.028 924.792 156.204 924.792C157.524 924.792 158.688 925.02 159.696 925.476C160.704 925.932 161.556 926.556 162.252 927.348C162.948 928.14 163.464 929.064 163.8 930.12C164.16 931.152 164.34 932.244 164.34 933.396C164.34 934.692 164.124 935.892 163.692 936.996C163.26 938.076 162.648 939.024 161.856 939.84C161.088 940.656 160.152 941.292 159.048 941.748C157.968 942.204 156.756 942.432 155.412 942.432Z"
+                        fill="black" />
+
+                    <defs>
+                        <linearGradient id="paint0_linear_381_2" x1="21.1593" y1="48.7705" x2="958.999" y2="50.647"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FFFBF7" />
+                            <stop offset="0.418269" stop-color="#FFF0C8" />
+                            <stop offset="1" stop-color="#FFEFDB" />
+                        </linearGradient>
+                    </defs>
+
+                </svg>
+            </aside>
+            <aside class="process_aside process_aside_image">
+                <img src="https://akn18.mypreviewsite.online/wp-content/uploads/2026/08/Gemini_Generated_Image_5lhaav5lhaav5lha.png"
+                    alt="">
+                <img class="handsPic" src="https://akn18.mypreviewsite.online/wp-content/uploads/2026/08/Group-2.png"
+                    alt="">
+            </aside>
+        </div>
 
         <section style="width: 100%; height: 2000px;"></section>
     </div>
@@ -116,24 +175,33 @@
         document.addEventListener("DOMContentLoaded", (event) => {
             gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
-            gsap.to("#ball1", {
+            gsap.to("#ball2", {
                 scrollTrigger: {
-                    trigger: "#processStep",
+                    trigger: "#process_step",
                     start: "top 0%",
                     end: "+=1000",
                     pin: true,
                     scrub: true
                 },
                 motionPath: {
-                    path: "#ballPath",
-                    align: "#ballPath",
+                    path: "#ballPath2",
+                    align: "#ballPath2",
                     alignOrigin: [0.5, 0.5]
+                }
+            });
+            gsap.to(".handsPic", {
+                clipPath: "inset(0 0% 0 0)",
+                duration: 1.5,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#process_step",
+                    start: "top 0%",
                 }
             });
 
         });
 
-        
+
 
 
 
