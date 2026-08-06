@@ -17,39 +17,13 @@
 
         #main .wrapper {
             width: 100%;
-            max-width: 1920px;
+            max-width: 1024px;
             margin: 0 auto;
             height: 100%;
             background-color: #ffffff;
             position: relative;
-            display: flex;
-            gap: 5%;
-
         }
 
-        .svgWrapper {
-            width: 100%;
-            height: 100%;
-        }
-
-        .contentWrapper {
-            width: 100%;
-            height: 100%;
-        }
-
-        .contentWrapper h1 {
-            font-size: clamp(20px, 3.6vw, 76px);
-        }
-
-        @media screen and (max-width:576px) {
-            .wrapper {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-between;
-            }
-
-        }
     </style>
 </head>
 
@@ -74,17 +48,12 @@
                             stroke-dasharray="12 8" mask="url(#timelineRevealMask)" />
                     </g>
 
-                    <image href="https://akn18.mypreviewsite.online/wp-content/uploads/2026/07/step_01.png" x="0%"
-                        y="0%" width="37%" />
-                    <image class="labelImage"
-                        href="https://akn18.mypreviewsite.online/wp-content/uploads/2026/07/step_02.png" x="64%" y="13%"
+                    <image href="./step_01-Photoroom.png" x="0%" y="0%" width="37%" />
+                    <image class="labelImage" href="./step_02-Photoroom.png" x="64%" y="13%"
                         width="35%" />
-                    <image class="labelImage"
-                        href="https://akn18.mypreviewsite.online/wp-content/uploads/2026/07/step_03.png" x="5%" y="43%"
-                        width="40%" />
-                    <image class="labelImage"
-                        href="https://akn18.mypreviewsite.online/wp-content/uploads/2026/07/step_04.png" x="37%" y="65%"
-                        width="60%" />
+                    <image class="labelImage" href="./step_03-Photoroom.png" x="5%" y="43%" width="40%" />
+                    <image class="labelImage" href="./step_04-Photoroom.png" x="37%" y="65%"
+                        width="55%" />
 
                     <!-- The Beginning -->
                     <g class="year-label1" transform="translate(250,120)">
@@ -102,8 +71,8 @@
                     </g>
                     <!-- 2000s -->
                     <g class="year-label" transform="translate(510,570)">
-                        <text class="years" x="0" y="0" dominant-baseline="middle" text-anchor="middle" font-size="2rem"
-                            font-family="Arial" fill="#73100A">The Expansion</text>
+                        <text class="years" x="0" y="0" dominant-baseline="middle" text-anchor="middle"
+                            font-size="2rem" font-family="Arial" fill="#73100A">The Expansion</text>
                         <text x="70" y="30" dominant-baseline="middle" text-anchor="middle" font-size="1.4rem"
                             font-family="Arial" fill="#73100A">2000s - Residential Developments</text>
                     </g>
@@ -116,30 +85,18 @@
                     </g>
                 </svg>
             </div>
-            <div class="contentWrapper">
-                <h1>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime animi at dolorem aliquid inventore
-                    pariatur quo quae distinctio. Exercitationem, odio, quam alias ratione, voluptate dolor aliquid
-                    aliquam pariatur ullam neque eius fugiat aspernatur inventore recusandae natus.</h1>
-            </div>
         </div>
     </main>
-    <section style="width: 100%; height: 500px;"></section>
 
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/MotionPathPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/SplitText.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            gsap.registerPlugin(ScrollTrigger, SplitText);
+            gsap.registerPlugin(ScrollTrigger);
 
-            let split = SplitText.create(".contentWrapper h1", {
-                type: "words, lines, chars",
-                mask: "lines",
-                linesClass: "line++"
-            });
             const path = document.querySelector("#timelinePath");
             const maskPath = document.querySelector("#maskPath");
             const pathLength = maskPath.getTotalLength();
@@ -153,7 +110,7 @@
 
             const tl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: "#main",
+                    trigger: "#timelineMap",
                     start: "top top",
                     end: "+=800",
                     scrub: true,
@@ -176,14 +133,9 @@
                 opacity: 0,
                 scale: 0.8,
                 stagger: 0.5,
-                duration: 1,
+                duration: 1.2,
                 ease: "back.out(1.7)"
-            }, "+1.1");
-            tl.from(split.words, {
-                opacity: 0.3,
-                duration: 0.5,
-                stagger: 0.1
-            }, "0")
+            }, "+1.5");
         });
 
 
